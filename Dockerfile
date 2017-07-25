@@ -5,7 +5,7 @@ ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PATH=$PATH:/home/superset/.bin \
     PYTHONPATH=/home/superset/.superset:$PYTHONPATH \
-    SUPERSET_VERSION=0.18.0
+    SUPERSET_VERSION=0.18.5
 
 # Install dependencies & create superset user
 RUN apk add --no-cache \
@@ -25,7 +25,7 @@ RUN apk add --no-cache \
         pyldap==2.4.28 \
         redis==2.10.5 \
         sqlalchemy-redshift==0.5.0 \
-        sqlalchemy-clickhouse \
+        sqlalchemy-clickhouse==0.1.2 \
         superset==$SUPERSET_VERSION && \
     addgroup superset && \
     adduser -h /home/superset -G superset -D superset && \
