@@ -1,4 +1,4 @@
-FROM amancevice/pandas:0.19.2-python3
+FROM amancevice/pandas:0.20.3-python3
 
 # Configure environment
 ENV LANG=C.UTF-8 \
