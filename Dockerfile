@@ -1,4 +1,4 @@
-FROM amancevice/pandas:0.20.3-python3
+FROM amancevice/pandas:0.20.3-python3-alpine
 
 # Configure environment
 ENV LANG=C.UTF-8 \
@@ -25,7 +25,7 @@ RUN apk add --no-cache \
         pyldap==2.4.28 \
         redis==2.10.5 \
         sqlalchemy-redshift==0.5.0 \
-        sqlalchemy-clickhouse==0.1.2 \
+        sqlalchemy-clickhouse \
         superset==$SUPERSET_VERSION && \
     addgroup superset && \
     adduser -h /home/superset -G superset -D superset && \
