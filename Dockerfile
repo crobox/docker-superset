@@ -1,14 +1,15 @@
 FROM amancevice/pandas:0.20.3-python3
 
 # Superset version
-ARG SUPERSET_VERSION=0.22.1
+ARG SUPERSET_VERSION=0.24.0
 
 # Configure environment
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PYTHONPATH=/etc/superset:$PYTHONPATH \
     SUPERSET_VERSION=${SUPERSET_VERSION} \
-    SUPERSET_HOME=/home/superset
+    SUPERSET_HOME=/home/superset \
+    SUPERSET_COMPLETE=/var/local
 
 # Configure Filesysten
 WORKDIR /home/superset

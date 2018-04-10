@@ -2,7 +2,7 @@
 
 set -e
 
-if [ ! -f $SUPERSET_HOME/.setup-complete ]; then
+if [ ! -f $SUPERSET_COMPLETE/.setup-complete ]; then
   echo "Running first time setup for Superset"
 
   echo "Creating admin user ${ADMIN_USERNAME}"
@@ -27,7 +27,7 @@ EOF
   echo "Creating default roles and permissions"
   superset init
 
-  touch $SUPERSET_HOME/.setup-complete
+  touch $SUPERSET_COMPLETE/.setup-complete
 
 else
   superset db upgrade
