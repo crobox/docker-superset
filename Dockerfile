@@ -1,17 +1,17 @@
 FROM amancevice/pandas:0.20.3-python3
 
 # Superset version
-ARG SUPERSET_VERSION=0.18.5
+ARG SUPERSET_VERSION=0.24.0
 
 # Configure environment
 ENV LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     PYTHONPATH=/etc/superset:$PYTHONPATH \
-    SUPERSET_VERSION=${SUPERSET_VERSION}
+    SUPERSET_VERSION=${SUPERSET_VERSION} \
+    SUPERSET_HOME=/home/superset \
+    SUPERSET_COMPLETE=/var/local
 
 # Configure Filesysten
-COPY superset /usr/local/bin
-VOLUME /etc/superset
 WORKDIR /home/superset
 
 # Install dependencies & create superset user
@@ -42,9 +42,12 @@ RUN useradd -U superset && \
     chown root:staff /usr/local/bin/superset* && \
     chown -R superset:superset /home/superset
 
+COPY superset/init.sh ./init.sh
+RUN chmod +x ./init.sh
+
 # Deploy application
 EXPOSE 8088
 HEALTHCHECK CMD ["curl", "-f", "http://localhost:8088/health"]
-ENTRYPOINT ["superset"]
-CMD ["runserver"]
+
+ENTRYPOINT ["./init.sh"]
 USER superset
